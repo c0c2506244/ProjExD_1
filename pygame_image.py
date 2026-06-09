@@ -21,18 +21,19 @@ def main():
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
-
+    
         key_lst = pg.key.get_pressed() #練習10-3：押されたすべてのキーの取得
+        x1=-1
+        y1=0
         if key_lst[pg.K_UP]: #上矢印キーが押された
-            kk_rct.move_ip((0, -1))
+            y1=-1
         if key_lst[pg.K_DOWN]: #下矢印キーが押された
-            kk_rct.move_ip((0, +1))
+            y1=1
         if key_lst[pg.K_RIGHT]: #右矢印キーが押された
-            kk_rct.move_ip((+2, 0))
+            x1=1
         if key_lst[pg.K_LEFT]: #左矢印キーが押された
-            kk_rct.move_ip((-1, 0))
-        else:
-            kk_rct.move_ip((-1,0))
+            x1=-1
+        kk_rct.move_ip((x1,y1))
 
 
         x = tmr % 3200 #練習5 & 練習9
