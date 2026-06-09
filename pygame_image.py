@@ -15,17 +15,35 @@ def main():
     kk_img = pg.transform.flip(kk_img,True,False) #練習3：左右反転
     tmr = 0
 
+    kk_rct = kk_img.get_rect() #練習10-1
+    kk_rct.center = 300,200 #練習10-2
+    
+
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
+
+        key_lst = pg.key.get_pressed() #練習10-3：押されたすべてのキーの取得
+        if key_lst[pg.K_UP]: #上矢印キーが押された
+            kk_rct.move_ip((0, -1))
+        if key_lst[pg.K_DOWN]: #下矢印キーが押された
+            kk_rct.move_ip((0, +1))
+        if key_lst[pg.K_RIGHT]: #右矢印キーが押された
+            kk_rct.move_ip((+1, 0))
+        if key_lst[pg.K_LEFT]: #左矢印キーが押された
+            kk_rct.move_ip((-1, 0))
+
         x = tmr % 3200 #練習5 & 練習9
         screen.blit(bg_img, [-x, 0])#練習５
         screen.blit(bg2_img,[-x+1600,0]) #練習7：連続させる
         screen.blit(bg_img,[-x+3200,0]) #練習9
-        screen.blit(kk_img, [300, 200]) #練習４
+        screen.blit(kk_img, kk_rct) #練習４ ＆　練習10
         pg.display.update()
         tmr += 1        
         clock.tick(200)#練習6
+
+
 
 
 if __name__ == "__main__":
